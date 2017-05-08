@@ -6,4 +6,5 @@ GPS tracking using an Adafruit Feather 32u4 RFM95 LoRa Radio and AWS services
 
 ![feather_3078](https://cloud.githubusercontent.com/assets/4920375/25772034/a2f2a50a-32a4-11e7-862f-2bc6c7d03c20.png)
 
-![gpstracker](https://cloud.githubusercontent.com/assets/4920375/25829779/f565bdba-349b-11e7-8c55-da38b4540518.png)
+![gpstracker](https://cloud.githubusercontent.com/assets/4920375/25830080/d50b65f4-349d-11e7-8016-5bfe612977ad.png)
+![feather_3078_map](https://cloud.githubusercontent.com/assets/4920375/25830088/dec356e2-349d-11e7-9509-b785966f39fb.png)
