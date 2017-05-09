@@ -1,0 +1,35 @@
+service: aws-python
+
+provider:
+  name: aws
+  runtime: python2.7
+
+  stage: dev
+  region: ap-southeast-2
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:BatchGetItem"
+        - "dynamodb:DescribeTable"
+        - "dynamodb:GetItem"
+        - "dynamodb:ListTables"
+        - "dynamodb:Query"
+        - "dynamodb:Scan"
+        - "dynamodb:DescribeReservedCapacity"
+        - "dynamodb:DescribeReservedCapacityOfferings"
+        - "dynamodb:ListTagsOfResource"
+        - "dynamodb:DescribeTimeToLive"
+      Resource: "*"
+
+functions:
+  location:
+    handler: handler.main
+
+    events:
+      - http:
+          path: location
+          method: get
+          cors:
+            origins:
+              - '*'
