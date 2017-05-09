@@ -7,6 +7,7 @@ A search for prototype breakout boards revealed the Adafruit Feather 32u4 with a
 ![feather_3078](https://cloud.githubusercontent.com/assets/4920375/25772034/a2f2a50a-32a4-11e7-862f-2bc6c7d03c20.png)
 
 Next step was to find a cheap GPS receiver and batteries. Eventually I settled on the VK2828U7G5LF GPS module and 3.7v LiPo batteries.
+
 ![vk2828u8g5lf](https://cloud.githubusercontent.com/assets/4920375/25771792/db6bf13a-329e-11e7-9a6e-a55ecd2b7c7f.png)
 
 # Shopping List
