@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>adafruit3078gps</title>
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+
+      function initMap() {
+        $.get('https://8zfhi1wor8.execute-api.ap-southeast-2.amazonaws.com/dev/location',{}, function(json) {
+          var LatLng = new google.maps.LatLng(json.deviceLocations[0].lat, json.deviceLocations[0].lng);
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: json.deviceLocations[0]
+          });
+          json.deviceLocations.forEach(newmarker);
+        });
+      }
+
+      function newmarker(item, index) {
+        new google.maps.Marker({
+          position: item,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 3
+          },
+          map: map,
+        });
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTc-m5AFmnm835747EkWxjrHFsrPrWXrc&callback=initMap">
+    </script>
+  </body>
+</html>

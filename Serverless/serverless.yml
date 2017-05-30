@@ -32,4 +32,4 @@ functions:
           method: get
           cors:
             origins:
-              - '*'
+              - '*.esrambler.com'

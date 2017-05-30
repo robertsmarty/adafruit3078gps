@@ -45,6 +45,45 @@ You'll also need to solder a whip antenna to both breakout boards. I'm using a p
 # Solution Design
 ![gpstracker](https://cloud.githubusercontent.com/assets/4920375/25830080/d50b65f4-349d-11e7-8016-5bfe612977ad.png)
 
+There are over 30 GPS satellites that contantly transmit their location and time. GPS receivers process data coming from multiple satellites and triangulate the current location, latitude and longitude. The GPS receiver I have used also determines speed and direction. It can also store about a day of data locally on the device which can then be uploaded later.
+
+
+The GPS receiver has serial RX/TX pins which I've connected to the Arduino serial RX/TX pins on an Adafuit feather. Once the onboard LoRa radio is configured, you can simply read from the Arduino serial RX and send the data to the radio.
+
+The receiving Adafruit feather is configured to listen to data recieved by the onboard LoRa radio and then write the data to another serial port. This second serial port can be connected to the USB of a computer for debugging. In this setup, I've connected the serial port to a Raspberry Pi which I'm using as an internet gateway, having connected it to my ADSL router. The Raspberry Pi reads the data and then forwards to an AWS DynamoDB table.
+
+In order to provide anonymous access and simplify data processing in a browser, I have used the Serverless framework to deploy an API on AWS Gateway backed by AWS Lambda which retreives data from DynamoDB and formats the data so that it can be easily processed on the client side.
+ 
+To visualise the data, I have configured an application in Google apps and obtained an API key which is required when developing applications utilising Google maps. A static html page stored in AWS S3 has some javascript which retrieves location data from the API hosted on AWS, renders a Google map centered on the first data point and then renders all the data points providing a map similar to the one below.
+
+AWS Route53 is used to register and host the DNS zone that I'm using. It also provides friendly DNS names for other AWS services such as AWS CloudFront. AWS CloudFront is used to cache S3 content and allow registration of a domain specific SSL certificates managed by AWS Certificate Manager. IAM provides services to create identities and manage access to services such as AWS DynamoDB. 
+
+#Tooling & Setup
+##Serverless
+Install node.js and pretty much follow instructions from Serverless web site. You'll need to setup AWS credentials in the ~/.aws folder.
+
+You'll notice in the serverless yaml configuration that cors configuration allows access to the API from specific DNS names. There is also corresponding configuration in the HTTP response found in the handler python code. 
+
+##Raspberry Pi
+You'll need to install pyserial, boto3 and setup AWS credentials in the ~/.aws folder before using the script. 
+
+##Arduino
+Install the Arduino IDE and follow installation instructions for the Adafruit feather. Specifically, you need to install the drivers and libraries for the radio. "Adafruit Feather 32u4" will need to be selected as the target device prior to uploading code.
+
+##Google API
+Google provides free access to their maps API however you need an API key so that Google can manage and throttle access. This key is embedded in the HTML page. The key also has restrictions on where the Google API can be called from so that it cannot be hijacked.
+
+##AWS Configuration
+I have setup most of my environment manually however it is possible to deploy the whole of the AWS environment using the serverless framework or CloudFormation.
+
+These are the things you'll need to setup...
+- A DynamoDB table and API keys to write to the table
+- An S3 public configured for web hosting
+- A CloudFront distribution with the S3 bucket configured as the origin
+- A certificate manager managed SSL certificate registerd against the CloudFront distribution
+- A DNS zone and friendly name/alias to reference the CloudDistribution
+
+
 # Results
 A drive around my area shows about a 400m range in residential areas with buildings and house. You’ll also see up to about 2kms range from the top of the Illawarra escarpment to my house.
 ![feather_3078_map](https://cloud.githubusercontent.com/assets/4920375/25830088/dec356e2-349d-11e7-9509-b785966f39fb.png)
