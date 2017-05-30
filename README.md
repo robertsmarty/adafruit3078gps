@@ -58,22 +58,22 @@ To visualise the data, I have configured an application in Google apps and obtai
 
 AWS Route53 is used to register and host the DNS zone that I'm using. It also provides friendly DNS names for other AWS services such as AWS CloudFront. AWS CloudFront is used to cache S3 content and allow registration of a domain specific SSL certificates managed by AWS Certificate Manager. IAM provides services to create identities and manage access to services such as AWS DynamoDB. 
 
-#Tooling & Setup
-##Serverless
+# Tooling & Setup
+## Serverless
 Install node.js and pretty much follow instructions from Serverless web site. You'll need to setup AWS credentials in the ~/.aws folder.
 
 You'll notice in the serverless yaml configuration that cors configuration allows access to the API from specific DNS names. There is also corresponding configuration in the HTTP response found in the handler python code. 
 
-##Raspberry Pi
+## Raspberry Pi
 You'll need to install pyserial, boto3 and setup AWS credentials in the ~/.aws folder before using the script. 
 
-##Arduino
+## Arduino
 Install the Arduino IDE and follow installation instructions for the Adafruit feather. Specifically, you need to install the drivers and libraries for the radio. "Adafruit Feather 32u4" will need to be selected as the target device prior to uploading code.
 
-##Google API
+## Google API
 Google provides free access to their maps API however you need an API key so that Google can manage and throttle access. This key is embedded in the HTML page. The key also has restrictions on where the Google API can be called from so that it cannot be hijacked.
 
-##AWS Configuration
+## AWS Configuration
 I have setup most of my environment manually however it is possible to deploy the whole of the AWS environment using the serverless framework or CloudFormation.
 
 These are the things you'll need to setup...
@@ -83,7 +83,8 @@ These are the things you'll need to setup...
 - A certificate manager managed SSL certificate registerd against the CloudFront distribution
 - A DNS zone and friendly name/alias to reference the CloudDistribution
 
-
 # Results
 A drive around my area shows about a 400m range in residential areas with buildings and house. You’ll also see up to about 2kms range from the top of the Illawarra escarpment to my house.
 ![feather_3078_map](https://cloud.githubusercontent.com/assets/4920375/25830088/dec356e2-349d-11e7-9509-b785966f39fb.png)
+
+I don't want to boil the ocean with this so reach out if you'd like more info!
