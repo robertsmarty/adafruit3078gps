@@ -17,7 +17,7 @@ Next step was to find a cheap GPS receiver and batteries. Eventually I settled o
 - 2x Micro serial cables to debug Adafruit Feather and connect to Raspberry Pi ~$6.00 (USD)
 - 1x Raspberry Pi (see later) ~$55 (USD) + ~$8 for power supply
 
-If you doen't have them already, you'll also need the following...
+If you don't have them already, you'll also need the following...
 - Soldering Iron
 - Solder
 - Wire (I used breadboard jumper wires)
@@ -29,6 +29,7 @@ I encourage you to have a look around the Adafruit web site. I feel like a kid i
 
 The Adafruit Feather 32u4 with LoRa Radio has comprehensive documentation on the Adafruit site and I have basically reused their code for these radios and added in some additional code for GPS and processing data.
 You can find doco for the GPS module here…
+
 https://github.com/CainZ/V.KEL-GPS/blob/master/VK2828U7G5LF%20Data%20Sheet%2020150902.pdf
 
 It's pretty interesting if you're into that sort of thing, like me!
@@ -40,6 +41,7 @@ When I received the gear, I worked out how to connect the GPS receiver up to one
 - GPS RX -> TX
 - GPS GND -> GND
 - GPS VCC -> 3V
+
 You'll also need to solder a whip antenna to both breakout boards. I'm using a public radio band with frequency 915Mhz. A search online returns 87mm as the best length antenna for this frequency.
 
 # Solution Design
